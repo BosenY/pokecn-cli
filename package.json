@@ -1,0 +1,32 @@
+{
+  "name": "pokecn",
+  "version": "0.1.0",
+  "description": "宝可梦终端百科全书 · Pokémon Terminal Encyclopedia",
+  "type": "module",
+  "bin": {
+    "pokecn": "./src/cli.ts"
+  },
+  "scripts": {
+    "dev": "bun src/cli.ts",
+    "build": "bun scripts/build.ts",
+    "build:name-map": "bun scripts/build-name-map.ts",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19.2.14"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "citty": "^0.2.2",
+    "fuse.js": "^7.3.0",
+    "ink": "^7.0.0",
+    "ink-text-input": "^6.0.0",
+    "picocolors": "^1.1.1",
+    "react": "^19.2.5",
+    "react-devtools-core": "^7.0.1",
+    "terminal-image": "^4.3.0"
+  }
+}
