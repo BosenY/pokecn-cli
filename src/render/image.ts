@@ -70,7 +70,7 @@ export async function renderSprite(
   if (!buffer) return "";
 
   return terminalImage.buffer(buffer, {
-    width: "50%",
+    width: "30%",
     preserveAspectRatio: true,
   });
 }
