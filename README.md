@@ -6,7 +6,13 @@
 
 ## 安装
 
-### 方式一：一键安装二进制（推荐，无需 Node / Bun）
+### 方式一：npm 全局安装（需要 Node.js >= 18）
+
+```bash
+npm install -g pokecn
+```
+
+### 方式二：一键安装二进制（无需 Node / Bun）
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/BosenY/pokecn-cli/main/install.sh | sh
@@ -14,15 +20,19 @@ curl -fsSL https://raw.githubusercontent.com/BosenY/pokecn-cli/main/install.sh |
 
 支持 macOS（Apple Silicon / Intel）和 Linux（x64 / arm64）。
 
-### 方式二：通过 Bun 全局安装
+### 方式三：通过 Bun 全局安装
 
 ```bash
 bun install -g pokecn
 ```
 
-### 方式三：临时体验，无需安装
+### 方式四：临时体验，零安装
 
 ```bash
+# Node.js
+npx pokecn get 皮卡丘
+
+# Bun
 bunx pokecn get 皮卡丘
 ```
 
@@ -83,7 +93,8 @@ pokecn get 皮卡丘 -T
 
 ## 技术栈
 
-- **运行时**: Bun
+- **开发运行时**: Bun
+- **发布产物**: Node.js 兼容的单文件 bundle（Node.js >= 18）
 - **语言**: TypeScript
 - **CLI 框架**: citty
 - **图片渲染**: terminal-image（自动检测 iTerm2/Kitty/ANSI 降级）
@@ -101,8 +112,11 @@ bun src/cli.ts get 皮卡丘
 # 测试
 bun test
 
-# 编译
-bun build --compile ./src/cli.ts --outfile bin/pokecn
+# 编译多平台二进制
+bun run build
+
+# 打包 npm 发布产物（Node.js 兼容）
+bun run build:npm
 
 # 重新生成中文名映射表
 bun scripts/build-name-map.ts
