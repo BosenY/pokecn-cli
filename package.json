@@ -6,11 +6,36 @@
   "bin": {
     "pokecn": "./src/cli.ts"
   },
+  "files": [
+    "src/",
+    "README.md"
+  ],
   "scripts": {
     "dev": "bun src/cli.ts",
     "build": "bun scripts/build.ts",
     "build:name-map": "bun scripts/build-name-map.ts",
     "test": "bun test"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "keywords": [
+    "pokemon",
+    "pokecn",
+    "cli",
+    "terminal",
+    "bun",
+    "宝可梦",
+    "图鉴"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/BosenY/pokecn-cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BosenY/pokecn-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BosenY/pokecn-cli/issues"
   },
   "devDependencies": {
     "@types/bun": "latest",

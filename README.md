@@ -6,16 +6,24 @@
 
 ## 安装
 
+### 方式一：一键安装二进制（推荐，无需 Node / Bun）
+
 ```bash
-# 开发者（需要 Bun）
-bun add -g pokecn
+curl -fsSL https://raw.githubusercontent.com/BosenY/pokecn-cli/main/install.sh | sh
+```
 
-# 直接运行（无需安装）
+支持 macOS（Apple Silicon / Intel）和 Linux（x64 / arm64）。
+
+### 方式二：通过 Bun 全局安装
+
+```bash
+bun install -g pokecn
+```
+
+### 方式三：临时体验，无需安装
+
+```bash
 bunx pokecn get 皮卡丘
-
-# 下载预编译二进制（GitHub Releases）
-curl -fsSL https://github.com/<your-name>/pokecn/releases/latest/download/pokecn-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m) -o pokecn
-chmod +x pokecn
 ```
 
 ## 使用

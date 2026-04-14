@@ -1,0 +1,11 @@
+scripts/
+tests/
+openspec/
+bin/
+.github/
+.cursor/
+.claude/
+*.lock
+tsconfig.json
+CLAUDE.md
+install.sh

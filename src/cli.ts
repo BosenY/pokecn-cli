@@ -1,11 +1,12 @@
 #!/usr/bin/env bun
 
 import { defineCommand, runMain } from "citty";
+import { version } from "../package.json";
 
 const main = defineCommand({
   meta: {
     name: "pokecn",
-    version: "0.1.0",
+    version,
     description: "宝可梦终端百科全书 · Pokémon Terminal Encyclopedia",
   },
   subCommands: {
