@@ -80,6 +80,9 @@ jobs:
           generate_release_notes: true
           fail_on_unmatched_files: true
 
+      - name: Build npm bundle
+        run: bun run build:npm
+
       - name: Publish to npm
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc

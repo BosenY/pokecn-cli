@@ -1,4 +1,4 @@
-import { mkdir } from "node:fs/promises";
+import { mkdir, readFile, writeFile, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { homedir } from "node:os";
 
@@ -36,13 +36,15 @@ export async function cachedFetch<T>(
 
   const cacheKey = endpoint.replace(/\//g, "_");
   const cacheFile = join(dirs.cache, `${cacheKey}.json`);
-  const file = Bun.file(cacheFile);
 
-  if (await file.exists()) {
-    const age = (Date.now() - file.lastModified) / 1000 / 60 / 60 / 24;
+  try {
+    const fileStat = await stat(cacheFile);
+    const age = (Date.now() - fileStat.mtimeMs) / 1000 / 60 / 60 / 24;
     if (age < ttlDays) {
-      return (await file.json()) as T;
+      return JSON.parse(await readFile(cacheFile, "utf8")) as T;
     }
+  } catch {
+    // 缓存不存在或读取失败，继续请求
   }
 
   const url = endpoint.startsWith("http")
@@ -54,6 +56,6 @@ export async function cachedFetch<T>(
   }
 
   const data = (await res.json()) as T;
-  await Bun.write(cacheFile, JSON.stringify(data));
+  await writeFile(cacheFile, JSON.stringify(data));
   return data;
 }

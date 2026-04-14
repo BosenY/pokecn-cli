@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { dirs } from "../cache/index.ts";
 
@@ -31,18 +32,13 @@ const DEFAULT_CONFIG: PokecnConfig = {
 
 export async function loadConfig(): Promise<PokecnConfig> {
   const configPath = join(dirs.root, "config.json");
-  const file = Bun.file(configPath);
 
-  if (await file.exists()) {
-    try {
-      const userConfig = await file.json();
-      return deepMerge(DEFAULT_CONFIG, userConfig);
-    } catch {
-      return { ...DEFAULT_CONFIG };
-    }
+  try {
+    const userConfig = JSON.parse(await readFile(configPath, "utf8"));
+    return deepMerge(DEFAULT_CONFIG, userConfig);
+  } catch {
+    return { ...DEFAULT_CONFIG };
   }
-
-  return { ...DEFAULT_CONFIG };
 }
 
 export function applyFlags(

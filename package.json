@@ -4,20 +4,21 @@
   "description": "宝可梦终端百科全书 · Pokémon Terminal Encyclopedia",
   "type": "module",
   "bin": {
-    "pokecn": "./src/cli.ts"
+    "pokecn": "./dist/cli.js"
   },
   "files": [
-    "src/",
+    "dist/",
     "README.md"
   ],
   "scripts": {
     "dev": "bun src/cli.ts",
     "build": "bun scripts/build.ts",
+    "build:npm": "bun scripts/build-npm.ts",
     "build:name-map": "bun scripts/build-name-map.ts",
     "test": "bun test"
   },
   "engines": {
-    "bun": ">=1.0.0"
+    "node": ">=18.0.0"
   },
   "keywords": [
     "pokemon",

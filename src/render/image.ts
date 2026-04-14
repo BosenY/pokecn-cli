@@ -1,4 +1,5 @@
 import terminalImage from "terminal-image";
+import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { dirs, ensureDirs } from "../cache/index.ts";
 
@@ -44,17 +45,18 @@ export async function getSpriteBuffer(
 
   const subDir = shiny ? "shiny" : "normal";
   const localPath = join(dirs.sprites, subDir, `${id}.png`);
-  const file = Bun.file(localPath);
 
-  if (await file.exists()) {
-    return Buffer.from(await file.arrayBuffer());
+  try {
+    return await readFile(localPath);
+  } catch {
+    // 本地缓存不存在，继续下载
   }
 
   const urls = getSpriteUrls(id, shiny);
   const buffer = await downloadWithFallback(urls);
 
   if (buffer) {
-    await Bun.write(localPath, buffer);
+    await writeFile(localPath, buffer);
   }
 
   return buffer;
